@@ -211,16 +211,16 @@ const rescheduleAppointment = async (date) => {
 
           await page.waitForTimeout(1000); // Adjust the delay as needed
           appointmentTimeDropdown.selectOption({ index: 1 });
-          // const rescheduleButton = page.locator('#appointments_submit');
-          // await rescheduleButton.click();
-          // const confirmButton = page.locator("'Confirm'");
-          // await confirmButton.click();
+          const rescheduleButton = page.locator('#appointments_submit');
+          await rescheduleButton.click();
+          const confirmButton = page.locator("'Confirm'");
+          await confirmButton.click();
           console.log("New appointment date booked: ", newAppointmentDate);
 
       } else {
           console.log("No appointments found");
       }
-      //await browser.close();
+      await browser.close();
   } catch (err) {
       console.log("Error: ", err);
   }
@@ -229,7 +229,7 @@ const rescheduleAppointment = async (date) => {
 (async () => {
   const browser = await puppeteer.launch(!IS_PROD ? {headless: false}: undefined);
 
-  //notifyStart();
+  notifyStart();
 
   try{
     await process(browser);
